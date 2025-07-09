@@ -119,6 +119,11 @@ app.get('/withdrawal/manage', requireLogin, (req, res) => res.render('withdrawal
 app.get('/game/manage', requireLogin, (req, res) => res.render('game/manage-game-account', { user: req.session.user }));
 app.get('/setting/manage-user', requireLogin, (req, res) => res.render('setting/manage-user', { user: req.session.user }));
 
+// 设置根路径跳转到 /login
+app.get('/', (req, res) => {
+  res.redirect('/login');
+});
+
 // 更多模块路由……
 app.listen(3000, () => {
   console.log('CRM system running on http://localhost:3000');
