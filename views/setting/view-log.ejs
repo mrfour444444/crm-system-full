@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Log</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-end" id="sidebar-wrapper">
+      <div class="sidebar-heading">CRM System</div>
+      <div class="list-group list-group-flush">
+        <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+        <a href="/setting/password-logs" class="list-group-item list-group-item-action">Password Logs</a>
+        <a href="/setting/manage-user" class="list-group-item list-group-item-action">Manage User</a>
+        <a href="/logout" class="list-group-item list-group-item-action text-danger">Logout</a>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+          <span class="navbar-brand">View Password Log</span>
+          <div class="d-flex ms-auto">
+            <span class="me-3">Hi, <%= user.username %></span>
+            <a href="/edit-user"><img src="/img/user.png" alt="user" width="32" height="32" /></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container mt-4">
+        <div class="card">
+          <div class="card-header">
+            <strong>User:</strong> <%= log.username %>
+          </div>
+          <div class="card-body">
+            <p><strong>Change Time:</strong> <%= log.change_time %></p>
+            <p><strong>IP Address:</strong> <%= log.ip_address %></p>
+          </div>
+        </div>
+        <a href="/setting/password-logs" class="btn btn-secondary mt-3">Back to Logs</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<% layout('layout') %>
+
+<div class="container-fluid px-4">
+  <h4 class="my-4">Manage Customers</h4>
+
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <div>
+      <a href="/customer/add" class="btn btn-primary">Add Customer</a>
+    </div>
+    <form method="GET" class="d-flex" style="max-width: 400px;">
+      <input type="text" name="keyword" class="form-control me-2" placeholder="Search by name or phone" value="<%= keyword || '' %>">
+      <button class="btn btn-secondary">Search</button>
+    </form>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover" id="dataTable">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Credit</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (Array.isArray(customers) && customers.length > 0) { %>
+          <% customers.forEach(customer => { %>
+            <tr>
+              <td><%= customer.id %></td>
+              <td><%= customer.name %></td>
+              <td><%= customer.phone %></td>
+              <td><%= customer.email %></td>
+              <td><%= customer.credit %></td>
+              <td><%= customer.status === 1 ? 'Active' : 'Inactive' %></td>
+              <td><%= customer.created_at %></td>
+              <td>
+                <a href="/customer/edit?id=<%= customer.id %>" class="btn btn-sm btn-warning">Edit</a>
+                <a href="/customer/delete?id=<%= customer.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Confirm delete?')">Delete</a>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr><td colspan="8" class="text-center">No customers found.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  $(document).ready(() => {
+    $('#dataTable').DataTable();
+  });
+</script>

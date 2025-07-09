@@ -1,0 +1,21 @@
+<h2>Dashboard</h2>
+
+<div class="row">
+  <div class="col box blue">
+    <h3>Total Customers</h3>
+    <p><%= totalCustomers || 0 %></p>
+  </div>
+  <div class="col box green">
+    <h3>Total Deposits</h3>
+    <p>RM <%= totalDeposits || 0 %></p>
+  </div>
+  <div class="col box red">
+    <h3>Total Withdrawals</h3>
+    <p>RM <%= totalWithdrawals || 0 %></p>
+  </div>
+<div class="col box yellow">
+  <h3>Pending Game Approvals</h3>
+  <p><%= pendingApprovals || 0 %></p>
+</div>
+
+</div>

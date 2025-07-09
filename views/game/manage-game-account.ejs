@@ -1,0 +1,52 @@
+<% res.locals.page = 'game-manage'; %>
+
+<div class="main-content">
+  <div class="page-header">
+    <h1>Manage Game Accounts</h1>
+    <a href="/game/add" class="btn btn-primary">Add Game Account</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover" id="dataTable">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Platform</th>
+          <th>Player Name</th>
+          <th>Game ID</th>
+          <th>Credit</th>
+          <th>Status</th>
+          <th>Remark</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (Array.isArray(gameAccounts) && gameAccounts.length > 0) { %>
+          <% gameAccounts.forEach(function(account) { %>
+            <tr>
+              <td><%= account.id %></td>
+              <td><%= account.platform %></td>
+              <td><%= account.player_name %></td>
+              <td><%= account.game_id %></td>
+              <td><%= account.credit %></td>
+              <td><%= account.status == 1 ? 'Active' : 'Pending' %></td>
+              <td><%= account.remark %></td>
+              <td>
+                <a href="/game/edit/<%= account.id %>" class="btn btn-sm btn-warning">Edit</a>
+                <a href="/game/delete/<%= account.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this account?')">Delete</a>
+              </td>
+            </tr>
+          <% }); %>
+        <% } else { %>
+          <tr><td colspan="8" class="text-center">No game accounts found.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    $('#dataTable').DataTable();
+  });
+</script>

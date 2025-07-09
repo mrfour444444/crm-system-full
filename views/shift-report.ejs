@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shift Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="border-end bg-white" id="sidebar-wrapper" style="min-width: 250px;">
+      <div class="sidebar-heading border-bottom bg-light"><strong>CRM Panel</strong></div>
+      <div class="list-group list-group-flush">
+        <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+        <a href="/shift-report" class="list-group-item list-group-item-action active">Shift Report</a>
+        <a href="/email-error" class="list-group-item list-group-item-action">Email Error List</a>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="w-100">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-3">
+        <span class="navbar-text me-auto">Shift Report</span>
+        <div class="d-flex align-items-center">
+          <span class="me-3">Hi, <%= user?.username %></span>
+          <form action="/logout" method="POST">
+            <button class="btn btn-outline-danger btn-sm">Logout</button>
+          </form>
+        </div>
+      </nav>
+
+      <div class="container-fluid px-4 mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0">Shift Reports</h5>
+          <a href="/shift-report/add" class="btn btn-primary btn-sm">+ Add Shift Report</a>
+        </div>
+
+        <div class="table-responsive">
+          <table id="dataTable" class="table table-striped table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Login Time</th>
+                <th>Logout Time</th>
+                <th>Total Transaction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (Array.isArray(shiftReports) && shiftReports.length > 0) { %>
+                <% shiftReports.forEach((report) => { %>
+                  <tr>
+                    <td><%= report.id %></td>
+                    <td><%= report.username %></td>
+                    <td><%= report.login_time %></td>
+                    <td><%= report.logout_time %></td>
+                    <td><%= report.total_transaction %></td>
+                  </tr>
+                <% }) %>
+              <% } else { %>
+                <tr><td colspan="5" class="text-center">No reports found.</td></tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(() => {
+      $('#dataTable').DataTable();
+    });
+  </script>
+</body>
+</html>

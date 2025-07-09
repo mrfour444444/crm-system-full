@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Error List</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <style>
+    .dataTables_wrapper {
+      padding: 20px;
+      background: #fff;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-end" id="sidebar-wrapper">
+      <div class="sidebar-heading">CRM System</div>
+      <div class="list-group list-group-flush">
+        <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+        <a href="/customer/manage" class="list-group-item list-group-item-action">Customers</a>
+        <a href="/deposit/manage" class="list-group-item list-group-item-action">Deposits</a>
+        <a href="/withdrawal/manage" class="list-group-item list-group-item-action">Withdrawals</a>
+        <a href="/game/manage" class="list-group-item list-group-item-action">Game Accounts</a>
+        <a href="/setting/manage-user" class="list-group-item list-group-item-action">Settings</a>
+        <a href="/logout" class="list-group-item list-group-item-action text-danger">Logout</a>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+          <span class="navbar-brand">Email Error List</span>
+          <div class="d-flex ms-auto">
+            <span class="me-3">Hi, <%= user.username %></span>
+            <a href="/edit-user"><img src="/img/user.png" alt="user" width="32" height="32"/></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid mt-4">
+        <table id="emailErrorTable" class="display" style="width:100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Recipient</th>
+              <th>Subject</th>
+              <th>IP Address</th>
+              <th>Error Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% emailErrors.forEach(function(row) { %>
+              <tr>
+                <td><%= row.id %></td>
+                <td><%= row.recipient %></td>
+                <td><%= row.subject %></td>
+                <td><%= row.ip_address %></td>
+                <td><%= row.error_date %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- DataTables JS -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#emailErrorTable').DataTable({
+        pageLength: 10,
+        lengthMenu: [10, 25, 50, 100]
+      });
+    });
+  </script>
+</body>
+</html>

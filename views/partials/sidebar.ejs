@@ -1,0 +1,63 @@
+<div class="sidebar">
+  <h4 class="px-3">CRM Admin</h4>
+
+  <div class="nav-item">
+    <a href="/dashboard" class="nav-link">Dashboard</a>
+  </div>
+
+  <div class="nav-item">
+    <a href="/shift-report" class="nav-link">Shift Report</a>
+  </div>
+
+  <div class="nav-item">
+    <a href="/email-error" class="nav-link">Email Error List</a>
+  </div>
+
+  <div class="nav-item">
+    <a class="nav-link" onclick="toggleSubmenu(this)">Customer ▾</a>
+    <div class="submenu">
+      <a href="/customers/manage" class="nav-link">Manage Customer</a>
+      <a href="/customers/add" class="nav-link">Add Customer</a>
+      <a href="/customers/source" class="nav-link">Manage Source</a>
+      <a href="/customers/win-lose" class="nav-link">Customer Win/Lose</a>
+      <a href="/customers/import-export" class="nav-link">Import/Export</a>
+    </div>
+  </div>
+
+  <div class="nav-item">
+    <a class="nav-link" onclick="toggleSubmenu(this)">Deposit ▾</a>
+    <div class="submenu">
+      <a href="/deposit/manage" class="nav-link">Manage Deposit</a>
+      <a href="/deposit/add" class="nav-link">Add Deposit</a>
+      <a href="/deposit/bonus" class="nav-link">Send Bonus</a>
+    </div>
+  </div>
+
+  <div class="nav-item">
+    <a class="nav-link" onclick="toggleSubmenu(this)">Withdrawal ▾</a>
+    <div class="submenu">
+      <a href="/withdrawal/manage" class="nav-link">Manage Withdrawal</a>
+      <a href="/withdrawal/add" class="nav-link">Add Withdrawal</a>
+      <a href="/withdrawal/transfer" class="nav-link">Add Transfer</a>
+    </div>
+  </div>
+
+  <div class="nav-item">
+    <a class="nav-link" onclick="toggleSubmenu(this)">Game Account ▾</a>
+    <div class="submenu">
+      <a href="/game/manage" class="nav-link">Manage Game Account</a>
+      <a href="/game/add" class="nav-link">Add Game Account</a>
+    </div>
+  </div>
+
+  <div class="nav-item">
+    <a href="/setting/manage-user" class="nav-link">Manage Users</a>
+  </div>
+</div>
+
+<script>
+  function toggleSubmenu(el) {
+    const parent = el.parentElement;
+    parent.classList.toggle('open');
+  }
+</script>

@@ -1,0 +1,205 @@
+/* 全局字体和页面基础样式 */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar 样式 */
+.sidebar {
+  width: 240px;
+  background-color: #343a40;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  padding-top: 1rem;
+  z-index: 1000;
+}
+
+.sidebar-header {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar-menu li {
+  border-top: 1px solid #495057;
+}
+
+.sidebar-menu li a {
+  display: block;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li.open > a {
+  background-color: #495057;
+}
+
+/* 子菜单 */
+.submenu {
+  list-style: none;
+  padding-left: 0;
+  display: none;
+  background-color: #3d434a;
+}
+
+.has-submenu.open .submenu {
+  display: block;
+}
+
+.submenu li a {
+  padding-left: 40px;
+  font-size: 0.9rem;
+  background-color: #3d434a;
+}
+
+.submenu li a:hover {
+  background-color: #565d64;
+}
+
+/* 主内容区域 */
+.main-content {
+  margin-left: 240px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* 顶部栏样式 */
+.topbar {
+  height: 60px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+}
+
+/* 按钮间距 */
+.topbar .btn {
+  font-size: 0.85rem;
+  padding: 4px 10px;
+}
+
+/* 用户区域 */
+.topbar-right {
+  position: relative;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.logout-dropdown {
+  display: none;
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 140px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.logout-dropdown a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.logout-dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.logout-dropdown.show {
+  display: block;
+}
+
+/* 表格美化（配合 DataTables） */
+table.dataTable thead th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  margin-left: 0.5em;
+  display: inline-block;
+  width: auto;
+}
+
+/* 表单美化 */
+input, select, textarea {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 6px 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+button, .btn {
+  font-size: 0.95rem;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    width: 200px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 10px;
+  }
+
+  .topbar .btn {
+    margin-bottom: 5px;
+  }
+}
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  background-color: #6c757d;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
+}

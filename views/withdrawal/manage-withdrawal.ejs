@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Withdrawal</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-end" id="sidebar-wrapper">
+      <div class="sidebar-heading">CRM System</div>
+      <div class="list-group list-group-flush">
+        <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+        <a href="/withdrawal/manage-withdrawal" class="list-group-item list-group-item-action active">Manage Withdrawal</a>
+        <a href="/withdrawal/add-withdrawal" class="list-group-item list-group-item-action">Add Withdrawal</a>
+        <a href="/logout" class="list-group-item list-group-item-action text-danger">Logout</a>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+          <span class="navbar-brand">Manage Withdrawal</span>
+          <div class="d-flex ms-auto">
+            <span class="me-3">Hi, <%= user.username %></span>
+            <a href="/edit-user"><img src="/img/user.png" alt="user" width="32" height="32"/></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid mt-4">
+        <% if (msg) { %>
+          <div class="alert alert-success"><%= msg %></div>
+        <% } %>
+
+        <table id="withdrawalsTable" class="display">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Player Name</th>
+              <th>Platform</th>
+              <th>Amount</th>
+              <th>From Bank</th>
+              <th>To Bank</th>
+              <th>Status</th>
+              <th>Approved By</th>
+              <% if (user.can_approve_withdrawal) { %>
+              <th>Actions</th>
+              <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <% withdrawals.forEach(function(w) { %>
+              <tr>
+                <td><%= w.id %></td>
+                <td><%= w.player_name %></td>
+                <td><%= w.platform %></td>
+                <td><%= w.amount %></td>
+                <td><%= w.from_bank %></td>
+                <td><%= w.to_bank %></td>
+                <td><%= w.status %></td>
+                <td><%= w.approved_by || '-' %></td>
+                <% if (user.can_approve_withdrawal) { %>
+                <td>
+                  <% if (w.status === 'Pending') { %>
+                    <a href="/withdrawal/approve/<%= w.id %>" class="btn btn-success btn-sm">Approve</a>
+                    <a href="/withdrawal/reject/<%= w.id %>" class="btn btn-danger btn-sm">Reject</a>
+                  <% } else { %>
+                    <span class="text-muted">No action</span>
+                  <% } %>
+                </td>
+                <% } %>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#withdrawalsTable').DataTable();
+    });
+  </script>
+</body>
+</html>

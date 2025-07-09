@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/topbar.ejs') %>
+    <title>Add Adjust</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <%- include('../partials/sidebar.ejs') %>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div class="d-flex justify-content-between flex-wrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Add Adjust</h1>
+          </div>
+
+          <% if (message) { %>
+            <div class="alert alert-success"><%= message %></div>
+          <% } %>
+
+          <form action="/setting/add-adjust" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="type" class="form-label">Type</label>
+              <select name="type" id="type" class="form-select" required>
+                <option value="">Select Type</option>
+                <option value="Add">Add</option>
+                <option value="Deduct">Deduct</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="amount" class="form-label">Amount</label>
+              <input type="number" name="amount" id="amount" class="form-control" step="0.01" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<% layout('layout') %>
+
+<div class="main-content" style="margin-left: 220px; padding: 20px;">
+  <div class="container-fluid px-4">
+    <h4 class="my-4">Manage Deposit</h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" id="dataTable">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Ref No</th>
+            <th>Submitted At</th>
+            <th>Approved By</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (Array.isArray(deposits) && deposits.length > 0) { %>
+            <% deposits.forEach(function(dep) { %>
+              <tr>
+                <td><%= dep.id %></td>
+                <td><%= dep.customer_name || 'N/A' %></td>
+                <td><%= dep.amount %></td>
+                <td>
+                  <% if (dep.status === 'Approved') { %>
+                    <span class="badge bg-success">Approved</span>
+                  <% } else if (dep.status === 'Rejected') { %>
+                    <span class="badge bg-danger">Rejected</span>
+                  <% } else { %>
+                    <span class="badge bg-secondary">Pending</span>
+                  <% } %>
+                </td>
+                <td><%= dep.ref_no %></td>
+                <td><%= dep.submitted_at %></td>
+                <td><%= dep.approved_by || '-' %></td>
+                <td>
+                  <% if (dep.status === 'Pending') { %>
+                    <a href="/deposit/approve/<%= dep.id %>" class="btn btn-sm btn-success">Approve</a>
+                    <a href="/deposit/reject/<%= dep.id %>" class="btn btn-sm btn-danger">Reject</a>
+                  <% } else { %>
+                    <span class="text-muted">No Action</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          <% } else { %>
+            <tr><td colspan="8" class="text-center">No deposit records found.</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#dataTable').DataTable();
+  });
+</script>

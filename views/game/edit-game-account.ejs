@@ -1,0 +1,53 @@
+<% res.locals.page = 'edit-game-account'; %>
+
+<div class="main-content">
+  <div class="page-header">
+    <h1>Edit Game Account</h1>
+  </div>
+
+  <form method="POST" action="/game/edit/<%= game.id %>">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="platform">Game Platform</label>
+        <input type="text" name="platform" id="platform" value="<%= game.platform %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="player_name">Player Name</label>
+        <input type="text" name="player_name" id="player_name" value="<%= game.player_name %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="game_id">Game ID</label>
+        <input type="text" name="game_id" id="game_id" value="<%= game.game_id %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password" value="<%= game.password %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="credit">Credit</label>
+        <input type="number" name="credit" id="credit" step="0.01" value="<%= game.credit %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select name="status" id="status" required>
+          <option value="1" <%= game.status == 1 ? 'selected' : '' %>>Active</option>
+          <option value="0" <%= game.status == 0 ? 'selected' : '' %>>Pending</option>
+        </select>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="remark">Remark</label>
+        <textarea name="remark" id="remark" rows="2"><%= game.remark %></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <button type="submit" class="btn-submit">Update</button>
+      </div>
+    </div>
+  </form>
+</div>

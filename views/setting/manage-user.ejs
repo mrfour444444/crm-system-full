@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Users</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="sidebar">
+      <%- include('../partials/sidebar') %>
+    </div>
+
+    <div class="main-content">
+      <%- include('../partials/topbar') %>
+
+      <div class="container-fluid px-4">
+        <h4 class="my-4">Manage Users</h4>
+
+        <div class="mb-3">
+          <% if (user.can_add_user || user.username === 'admin') { %>
+            <a href="/setting/add-user" class="btn btn-primary">Add User</a>
+          <% } %>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" id="dataTable">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Role</th>
+                <th>Can Withdraw</th>
+                <th>Can Add User</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (Array.isArray(users) && users.length > 0) { %>
+                <% users.forEach(function(user) { %>
+                  <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.username %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.status === 1 ? 'Active' : 'Inactive' %></td>
+                    <td><%= user.role || 'staff' %></td>
+                    <td><%= user.can_withdraw ? 'Yes' : 'No' %></td>
+                    <td><%= user.can_add_user ? 'Yes' : 'No' %></td>
+                    <td>
+                      <a href="/setting/edit-user?id=<%= user.id %>" class="btn btn-sm btn-warning">Edit</a>
+                      <a href="/setting/delete-user?id=<%= user.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this user?')">Delete</a>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } else { %>
+                <tr><td colspan="8" class="text-center">No users found.</td></tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable();
+    });
+  </script>
+</body>
+</html>

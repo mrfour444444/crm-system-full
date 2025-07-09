@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Bank</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-end" id="sidebar-wrapper">
+      <div class="sidebar-heading px-3 py-4">CRM SYSTEM</div>
+      <div class="list-group list-group-flush">
+        <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+        <a href="/deposit/manage-deposit" class="list-group-item list-group-item-action">Deposit</a>
+        <a href="/withdrawal/manage-withdrawal" class="list-group-item list-group-item-action">Withdrawal</a>
+        <a href="/game/manage-game-account" class="list-group-item list-group-item-action">Game Account</a>
+        <a href="/customers/manage-customers" class="list-group-item list-group-item-action">Customer</a>
+        <a href="/setting/manage-user" class="list-group-item list-group-item-action active">Setting</a>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom px-4">
+        <div class="ms-auto d-flex align-items-center">
+          <span class="me-3">Hi, <%= user.username %></span>
+          <a href="/edit-user" class="btn btn-outline-secondary btn-sm me-2">Edit Profile</a>
+          <form action="/logout" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+          </form>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <div class="container-fluid px-4 mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">Edit Bank</h4>
+          <a href="/setting/manage-bank" class="btn btn-secondary">Back</a>
+        </div>
+
+        <% if (message) { %>
+          <div class="alert alert-info"><%= message %></div>
+        <% } %>
+
+        <form action="/setting/edit-bank?id=<%= bank.id %>" method="POST" class="row g-3">
+          <div class="col-md-6">
+            <label for="bank_name" class="form-label">Bank Name</label>
+            <input type="text" class="form-control" id="bank_name" name="bank_name" value="<%= bank.bank_name %>" required>
+          </div>
+          <div class="col-md-6">
+            <label for="account_number" class="form-label">Account Number</label>
+            <input type="text" class="form-control" id="account_number" name="account_number" value="<%= bank.account_number %>" required>
+          </div>
+          <div class="col-md-6">
+            <label for="account_holder" class="form-label">Account Holder</label>
+            <input type="text" class="form-control" id="account_holder" name="account_holder" value="<%= bank.account_holder %>" required>
+          </div>
+          <div class="col-md-6">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" name="status" id="status">
+              <option value="1" <%= bank.status == 1 ? 'selected' : '' %>>Active</option>
+              <option value="0" <%= bank.status == 0 ? 'selected' : '' %>>Inactive</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Update Bank</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

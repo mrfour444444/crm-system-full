@@ -1,0 +1,28 @@
+<div class="topbar">
+  <div class="btn-group">
+    <button class="btn-start">Start Shift</button>
+    <button class="btn-popup">Popup Message</button>
+    <button class="btn-agent">Agent Player</button>
+    <button class="btn-withdraw">Withdraw Times</button>
+  </div>
+
+  <div class="user-info dropdown">
+    <span>Hi, <%= user ? user.username : 'Guest' %></span>
+    <div class="dropdown">
+      <button
+        class="btn btn-light dropdown-toggle"
+        type="button"
+        id="userDropdown"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        style="border-radius: 50%; width: 30px; height: 30px; padding: 0;"
+      >
+        <strong><%= user && user.username ? user.username.charAt(0).toUpperCase() : 'A' %></strong>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="/edit-user">Settings</a></li>
+        <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Withdrawal</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-end" id="sidebar-wrapper">
+      <div class="sidebar-heading">CRM System</div>
+      <div class="list-group list-group-flush">
+        <a href="/dashboard" class="list-group-item list-group-item-action">Dashboard</a>
+        <a href="/withdrawal/manage-withdrawal" class="list-group-item list-group-item-action">Manage Withdrawal</a>
+        <a href="/withdrawal/add-withdrawal" class="list-group-item list-group-item-action active">Add Withdrawal</a>
+        <a href="/logout" class="list-group-item list-group-item-action text-danger">Logout</a>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+          <span class="navbar-brand">Add Withdrawal</span>
+          <div class="d-flex ms-auto">
+            <span class="me-3">Hi, <%= user.username %></span>
+            <a href="/edit-user"><img src="/img/user.png" alt="user" width="32" height="32"/></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid mt-4">
+        <% if (msg) { %>
+          <div class="alert alert-info"><%= msg %></div>
+        <% } %>
+
+        <form action="/withdrawal/add-withdrawal" method="POST" class="row g-3">
+          <div class="col-md-6">
+            <label for="player_name" class="form-label">Player Name</label>
+            <input type="text" name="player_name" id="player_name" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="platform" class="form-label">Game Platform</label>
+            <input type="text" name="platform" id="platform" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" name="amount" id="amount" step="0.01" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="from_bank" class="form-label">From Bank</label>
+            <input type="text" name="from_bank" id="from_bank" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="to_bank" class="form-label">To Bank</label>
+            <input type="text" name="to_bank" id="to_bank" class="form-control" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="status" class="form-label">Status</label>
+            <select name="status" class="form-select">
+              <option value="Pending" selected>Pending</option>
+              <option value="Approved">Approved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-success">Submit Withdrawal</button>
+            <a href="/withdrawal/manage-withdrawal" class="btn btn-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

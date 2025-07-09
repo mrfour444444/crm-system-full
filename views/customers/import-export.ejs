@@ -1,0 +1,38 @@
+<div class="container-fluid px-4">
+  <h4 class="my-4">Import / Export Customer Data</h4>
+
+  <% if (typeof message !== 'undefined' && message) { %>
+    <div class="alert alert-info"><%= message %></div>
+  <% } %>
+
+  <div class="row">
+    <!-- Import Section -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">Import Customers (CSV)</div>
+        <div class="card-body">
+          <form action="/customer/import" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="csvFile" class="form-label">Upload CSV File</label>
+              <input type="file" class="form-control" id="csvFile" name="csvFile" accept=".csv" required>
+            </div>
+            <button type="submit" class="btn btn-success">Import</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export Section -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header bg-success text-white">Export Customers</div>
+        <div class="card-body">
+          <form action="/customer/export" method="GET">
+            <p>You can download the current customer list in CSV format.</p>
+            <button type="submit" class="btn btn-primary">Download CSV</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

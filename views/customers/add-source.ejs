@@ -1,0 +1,22 @@
+<% layout('layout') %>
+
+<div class="main-content" style="margin-left: 220px; padding: 20px;">
+  <div class="container-fluid px-4">
+    <h4 class="my-4">Add Source</h4>
+
+    <form action="/customer/source" method="POST" class="card p-4">
+      <div class="mb-3">
+        <label for="source_name" class="form-label">Source Name</label>
+        <input type="text" class="form-control" id="source_name" name="source_name" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success">Add Source</button>
+      <a href="/customer/manage" class="btn btn-secondary ms-2">Back</a>
+    </form>
+  </div>
+</div>

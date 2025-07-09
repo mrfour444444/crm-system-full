@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Bank</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="sidebar">
+      <!-- Sidebar -->
+      <%- include('../partials/sidebar') %>
+    </div>
+
+    <div class="main-content">
+      <%- include('../partials/topbar') %>
+
+      <div class="container-fluid px-4">
+        <h4 class="my-4">Manage Bank</h4>
+
+        <div class="mb-3">
+          <a href="/setting/add-bank" class="btn btn-primary">Add Bank</a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" id="dataTable">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Bank Name</th>
+                <th>Account Number</th>
+                <th>Account Holder</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (Array.isArray(banks) && banks.length > 0) { %>
+                <% banks.forEach(function(bank) { %>
+                  <tr>
+                    <td><%= bank.id %></td>
+                    <td><%= bank.bank_name %></td>
+                    <td><%= bank.account_number %></td>
+                    <td><%= bank.account_holder %></td>
+                    <td><%= bank.status === 1 ? 'Active' : 'Inactive' %></td>
+                    <td>
+                      <a href="/setting/edit-bank?id=<%= bank.id %>" class="btn btn-sm btn-warning">Edit</a>
+                      <a href="/setting/delete-bank?id=<%= bank.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this bank?')">Delete</a>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } else { %>
+                <tr><td colspan="6" class="text-center">No bank records found.</td></tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable();
+    });
+  </script>
+</body>
+</html>

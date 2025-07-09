@@ -1,0 +1,47 @@
+<% layout('layout') %>
+
+<div class="container-fluid px-4">
+  <h4 class="my-4">Manage Source</h4>
+
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <a href="/customer/source" class="btn btn-primary">Add Source</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover" id="dataTable">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Source Name</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (Array.isArray(sources) && sources.length > 0) { %>
+          <% sources.forEach(source => { %>
+            <tr>
+              <td><%= source.id %></td>
+              <td><%= source.name %></td>
+              <td><%= source.status === 1 ? 'Active' : 'Inactive' %></td>
+              <td><%= source.created_at %></td>
+              <td>
+                <a href="/customer/source/edit?id=<%= source.id %>" class="btn btn-sm btn-warning">Edit</a>
+                <a href="/customer/source/delete?id=<%= source.id %>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this source?')">Delete</a>
+              </td>
+            </tr>
+          <% }); %>
+        <% } else { %>
+          <tr><td colspan="5" class="text-center">No sources found.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  $(document).ready(() => {
+    $('#dataTable').DataTable();
+  });
+</script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Payout</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="sidebar">
+      <%- include('../partials/sidebar') %>
+    </div>
+
+    <div class="main-content">
+      <%- include('../partials/topbar') %>
+
+      <div class="container-fluid px-4">
+        <h4 class="my-4">Manage Payout</h4>
+
+        <div class="mb-3">
+          <a href="/setting/edit-payout" class="btn btn-primary">Edit Payout</a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" id="dataTable">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Total Payout</th>
+                <th>Last Updated</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (Array.isArray(payouts) && payouts.length > 0) { %>
+                <% payouts.forEach(function(payout) { %>
+                  <tr>
+                    <td><%= payout.id %></td>
+                    <td><%= payout.username %></td>
+                    <td><%= payout.total_payout %></td>
+                    <td><%= payout.updated_at %></td>
+                    <td><%= payout.status === 1 ? 'Active' : 'Inactive' %></td>
+                    <td>
+                      <a href="/setting/edit-payout?id=<%= payout.id %>" class="btn btn-sm btn-warning">Edit</a>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } else { %>
+                <tr><td colspan="6" class="text-center">No payout records found.</td></tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable();
+    });
+  </script>
+</body>
+</html>
