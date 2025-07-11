@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CRM System</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 </head>
 <body>
+  <% if (user) { %>
+  <!-- 登录后的页面：sidebar + topbar -->
   <div class="d-flex">
-
-    <% if (user) { %>
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">CRM</div>
@@ -60,52 +61,43 @@
         </li>
       </ul>
     </div>
-    <% } %>
 
-    <!-- Main Content -->
-    <div class="main-content flex-grow-1">
-
-      <% if (user) { %>
+    <!-- Content -->
+    <div class="main-content">
       <!-- Topbar -->
       <div class="topbar d-flex justify-content-between align-items-center p-2">
-        <div class="left-buttons d-flex">
-          <button class="btn btn-primary me-2">Start Shift</button>
-          <button class="btn btn-secondary me-2">Popup Message</button>
-          <button class="btn btn-success me-2">Agent Player</button>
-          <button class="btn btn-warning me-2">Withdraw Times</button>
+        <div>
+          <button class="btn btn-primary btn-sm">Start Shift</button>
+          <button class="btn btn-secondary btn-sm">Popup Message</button>
+          <button class="btn btn-success btn-sm">Agent Player</button>
+          <button class="btn btn-warning btn-sm">Withdraw Times</button>
         </div>
-        <div class="user-info d-flex align-items-center">
-          <span class="me-2">Hi, <%= user.username %></span>
-          <div class="dropdown">
-            <div class="circle-letter dropdown-toggle" data-bs-toggle="dropdown">
-              <%= user.username.charAt(0).toUpperCase() %>
-            </div>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="/edit-user">Edit User</a></li>
-              <li><a class="dropdown-item" href="/change-password">Change Password</a></li>
-              <li><a class="dropdown-item" href="/logout">Logout</a></li>
-            </ul>
-          </div>
+        <div class="d-flex align-items-center gap-2">
+          <span>Hi, <%= user.username %></span>
+          <a href="/edit-user" class="btn btn-sm btn-outline-dark rounded-circle"><%= user.username.charAt(0).toUpperCase() %></a>
         </div>
       </div>
-      <% } %>
 
-      <!-- Page Body -->
-      <div class="p-4">
+      <!-- Main Page -->
+      <div class="page-content p-3">
         <%- body %>
       </div>
     </div>
   </div>
 
-  <!-- JS -->
+  <% } else { %>
+  <!-- 登录页面只显示登录框 -->
+  <div class="login-wrapper">
+    <%- body %>
+  </div>
+  <% } %>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    document.querySelectorAll('.has-submenu > a').forEach(el => {
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        el.parentElement.classList.toggle('open');
-      });
+    $(document).ready(function () {
+      $('.datatable').DataTable();
     });
   </script>
 </body>
