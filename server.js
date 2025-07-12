@@ -40,8 +40,8 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  const user = await db.getUserByEmail(email);
+  const { username, password } = req.body;
+  const user = await db.getUserByUsername(username);
   if (!user) return res.render('login', { error: 'Invalid email or password' });
 
   const valid = await bcrypt.compare(password, user.password);
