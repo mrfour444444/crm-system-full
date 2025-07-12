@@ -10,8 +10,8 @@ logs/
 *.log
 
 # SQLite database (除非你需要上传)
-*.sqlite
-*.db
+# *.sqlite
+# *.db
 
 # OS generated files
 .DS_Store
